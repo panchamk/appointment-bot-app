@@ -99,6 +99,12 @@ task copyNextJsResources(type: Copy) {
     into 'build/resources/main/static'
 }
 
+
+task copyNextJsResourcesSrc(type: Copy) {
+    from '../nextjs-appointment-bot/out'
+    into 'src/main/resources/static'
+}
+
 tasks.named("compileJava").configure { dependsOn("copyNextJsResources") }
 tasks.named("resolveMainClassName").configure { dependsOn("copyNextJsResources") }
 tasks.named("jar").configure { dependsOn("copyNextJsResources") }

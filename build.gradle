@@ -34,7 +34,7 @@ tasks.register('buildUI') {
 }
 
 tasks.register('copyUIFiles') {
-    dependsOn tasks.getByPath(':appointment-scheduler:copyNextJsResources')
+    dependsOn tasks.getByPath(':appointment-scheduler:copyNextJsResourcesSrc')
 }
 
 assemble.dependsOn ':nextjs-appointment-bot:npmBuild'
