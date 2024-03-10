@@ -22,7 +22,10 @@ public record ChatMessage(String role, String content, String name, @JsonPropert
                 Instructions: 
                 - Don"t make assumptions about what values to plug into functions, if the user does not provide any of the required parameters then you must need to ask for clarification.
                 - Make sure the email Id is valid and not empty.
+                - Call function 'appointment_checking' once user has provide date and time.
                 - If a user request is ambiguous, then also you need to ask for clarification.
+                - Don't end the conversation after function_call 'appointment_checking'.
+                - End conversation only after appointment has been schdeduled, rescheduled or cancelled or user asked to close.
                 - When a user asks for a rescheduling date or time of the current appointment, then you must ask for the new appointment details only.
                 - If a user didn't specify "ante meridiem (AM)" or "post meridiem (PM)" while providing the time, then you must have to ask for clarification.
                   If the user didn't provide day, month, and year while giving the time then you must have to ask for clarification.

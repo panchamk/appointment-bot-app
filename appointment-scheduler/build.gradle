@@ -4,6 +4,7 @@ plugins {
     id 'application'
 	id 'org.springframework.boot' version '3.1.4'
 	id 'io.spring.dependency-management'
+    id 'com.google.cloud.tools.appengine'
 }
 
 group = 'com.pkg'

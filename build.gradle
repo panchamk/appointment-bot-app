@@ -7,7 +7,9 @@ buildscript {
     }
     dependencies {
         classpath 'io.spring.gradle:dependency-management-plugin:1.1.4'
+        classpath 'com.google.cloud.tools:appengine-gradle-plugin:2.8.0'
     }
+  }
 }
 plugins {
     id 'application'
@@ -19,6 +21,20 @@ allprojects {
     repositories {
         mavenCentral()
     }
+}
+
+
+application {
+    mainClassName = 'com.pkg.appointmentscheduler.AppointmentSchedulerApplication'
+}
+
+// App Engine plugin configuration
+configurations {
+    appengine
+}
+
+dependencies {
+    appengine 'com.google.cloud.tools:appengine-maven-plugin:2.8.0'
 }
 
 tasks.register('start') {
@@ -39,3 +55,15 @@ tasks.register('copyUIFiles') {
 
 assemble.dependsOn ':nextjs-appointment-bot:npmBuild'
 assemble.dependsOn ':appointment-scheduler:copyNextJsResources'
+
+
+
+appengineDeploy.dependsOn test
+appengineStage.dependsOn test
+
+appengine {  // App Engine tasks configuration
+  deploy {   // deploy configuration
+    projectId = System.getenv('GOOGLE_CLOUD_PROJECT')
+    version = '1'
+  }
+}

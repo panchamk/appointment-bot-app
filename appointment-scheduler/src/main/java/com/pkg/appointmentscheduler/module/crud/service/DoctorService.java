@@ -24,6 +24,11 @@ public class DoctorService {
     DoctorStorage doctorStorage;
 
     @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
+    public List<Doctor> fetchDoctorList() {
+        return doctorStorage.findAll();
+    }
+    
+    @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
     public Optional<Doctor> fetchDoctorInfo(String doctorId) {
         return doctorStorage.findById(doctorId);
     }

@@ -26,9 +26,15 @@ import com.pkg.appointmentscheduler.module.crud.service.DoctorSlotService;
 @RequestMapping(path = "/v1/doctor", produces = MediaType.APPLICATION_JSON_VALUE)
 public class DoctorAdminController {
 
+    DoctorService doctorService;
     AppointmentService appointmentService;
     DoctorSlotService doctorSlotService;
 
+    @GetMapping("list")
+    public List<Doctor> fetchDoctors() {
+        return doctorService.fetchD
+        octorList();
+    }
     @GetMapping("/{doctorId}/booked")
     public List<PatientAppointment> fetchAppointments(@PathVariable("doctorId") String doctorId) {
         return appointmentService.fetchAppointments(doctorId);

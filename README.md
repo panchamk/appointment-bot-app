@@ -15,4 +15,7 @@ An appointment scheduling service powered by openai chat assistant model.
 ```
 ./gradlew startUI
 ```
-## 
+## deploy service on google app engine.
+```
+./gradlew appengnineRun
+```
