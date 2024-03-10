@@ -1,0 +1,58 @@
+plugins {
+    id 'com.github.node-gradle.node' version '7.0.2'
+    id 'application'
+}
+
+group 'com.pkg'
+version '0.0.1-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+//    classpath 'com.moowork.gradle:gradle-node-plugin:1.3.1'
+    // Add other dependencies as needed
+}
+
+node {
+    version = '18.19.1'
+    npmVersion = '10.2.4'
+    download = true
+}
+
+npmInstall {
+    dependsOn nodeSetup
+
+    execOverrides {
+        it.workingDir = project.projectDir
+    }
+
+    args = ['install']
+}
+
+task npmBuild(type: NpmTask) {
+    dependsOn npmInstall
+
+    execOverrides {
+        it.workingDir = project.projectDir
+    }
+
+    args = ['run', 'build']
+}
+
+task npmRun(type: NpmTask) {
+    dependsOn npmInstall
+
+    execOverrides {
+        it.workingDir = project.projectDir
+    }
+
+    args = ['run', 'dev']
+}
+//
+//// Ensure npmBuild runs when building the project
+//assemble {
+//    dependsOn npmBuild
+//}

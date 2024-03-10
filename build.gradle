@@ -1,0 +1,41 @@
+
+buildscript {
+    repositories {
+        maven {
+            url 'https://plugins.gradle.org/m2/'
+        }
+    }
+    dependencies {
+        classpath 'io.spring.gradle:dependency-management-plugin:1.1.4'
+    }
+}
+plugins {
+    id 'application'
+}
+
+group = 'com.pkg'
+version = '0.0.1-SNAPSHOT'
+allprojects {
+    repositories {
+        mavenCentral()
+    }
+}
+
+tasks.register('start') {
+    dependsOn tasks.getByPath('appointment-scheduler:bootRunDev')
+}
+
+tasks.register('startUI') {
+    dependsOn tasks.getByPath(':nextjs-appointment-bot:npmRun')
+}
+
+tasks.register('buildUI') {
+    dependsOn tasks.getByPath(':nextjs-appointment-bot:npmBuild')
+}
+
+tasks.register('copyUIFiles') {
+    dependsOn tasks.getByPath(':appointment-scheduler:copyNextJsResources')
+}
+
+assemble.dependsOn ':nextjs-appointment-bot:npmBuild'
+assemble.dependsOn ':appointment-scheduler:copyNextJsResources'

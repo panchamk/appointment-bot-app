@@ -1,0 +1,9 @@
+rootProject.name = 'appointment-bot-app'
+include 'appointment-scheduler'
+include 'nextjs-appointment-bot'
+
+dependencyResolutionManagement {
+    repositories {
+        mavenCentral()
+    }
+}
