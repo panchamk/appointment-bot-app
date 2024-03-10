@@ -24,6 +24,7 @@ openai:
   model: gpt-3.5-turbo
   api:
     url: https://api.openai.com
+    key: ${openai_api_key}
 management:
   server:
     port: 8081

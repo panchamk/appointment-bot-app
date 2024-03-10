@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class FeignHeaderInterceptor implements RequestInterceptor {
 
-    @Value("${openai_api_key}")
+    @Value("${openai.api.key}")
     private String apiKey;
 
     @Override
