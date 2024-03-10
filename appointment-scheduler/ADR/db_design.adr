@@ -1,0 +1,32 @@
+doctor {
+	id varchar pk
+	email varchar
+	name varchar
+	specialization varchar
+}
+
+patient {
+	id varchar pk
+	contact integer pk
+	name varchar
+	age int
+	details varchar
+}
+
+appointment {
+	id int pk
+	patient_id varchar > patient.id
+	doctor_id varchar > doctor.id
+	start_time long
+	end_time long
+	deleted tinyint
+}
+
+doctor_slots {
+	slot_id varchar
+	doctor_id varchar > doctor.id
+	start_time long
+	end_time long
+	deleted tinyint
+}
+

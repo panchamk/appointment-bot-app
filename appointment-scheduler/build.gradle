@@ -1,0 +1,106 @@
+plugins {
+	id 'java'
+	id 'war'
+    id 'application'
+	id 'org.springframework.boot' version '3.1.4'
+	id 'io.spring.dependency-management'
+}
+
+group = 'com.pkg'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '17'
+}
+
+ext {
+    set 'springBootVersion', '3.1.4'
+    set 'springCloudVersion', '2022.0.4'
+    set 'testcontainersVersion', '1.17.4'
+}
+repositories {
+    mavenCentral()
+    maven {
+        url = uri('https://repo.maven.apache.org/maven2/')
+    }
+}
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-autoconfigure'
+
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    implementation 'io.github.openfeign:feign-okhttp'
+    implementation 'io.github.openfeign:feign-micrometer'
+
+    implementation platform("org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}")
+    implementation platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
+
+	compileOnly 'org.projectlombok:lombok'
+	runtimeOnly 'com.h2database:h2'
+	runtimeOnly 'io.micrometer:micrometer-registry-prometheus'
+    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+
+    implementation 'com.google.guava:guava:33.0.0-jre'
+    implementation 'jakarta.inject:jakarta.inject-api:2.0.1'
+    implementation 'co.elastic.logging:logback-ecs-encoder:1.5.0'
+    implementation 'org.apache.commons:commons-lang3'
+    implementation 'commons-io:commons-io:2.15.1'
+
+    runtimeOnly 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.0'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    testImplementation 'org.projectlombok:lombok:1.18.26'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.2'
+    testImplementation 'org.testcontainers:junit-jupiter'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+tasks.register('bootRunDev') {
+    group = 'application'
+    description = "Runs the app with local setup"
+    doFirst {
+        tasks.bootRun.configure {
+            systemProperty("spring.profiles.active", "dev")
+        }
+    }
+    finalizedBy("bootRun")
+}
+
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+
+
+task copyNextJsResources(type: Copy) {
+    from '../nextjs-appointment-bot/out'
+    into 'build/resources/main/static'
+}
+
+tasks.named("compileJava").configure { dependsOn("copyNextJsResources") }
+tasks.named("resolveMainClassName").configure { dependsOn("copyNextJsResources") }
+tasks.named("jar").configure { dependsOn("copyNextJsResources") }
+tasks.named("war").configure { dependsOn("copyNextJsResources") }
+

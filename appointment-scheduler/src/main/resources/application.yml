@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: appointment-scheduler
+  cloud:
+    openfeign:
+      httpclient:
+        disable-ssl-validation: true
+        connection-timeout: 5000
+        ok-http:
+          read-timeout: 30000
+      okhttp:
+        enabled: true
+  datasource:
+    url: jdbc:h2:mem:appointment-scheduler-db
+    username: walnut
+    password: pass
+    driverClassName: org.h2.Driver
+  jpa:
+    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+  h2:
+    console:
+      enabled: true
+openai:
+  model: gpt-3.5-turbo
+  api:
+    url: https://api.openai.com
+management:
+  server:
+    port: 8081
+  endpoints:
+    web:
+      exposure:
+        include: health, metrics, prometheus

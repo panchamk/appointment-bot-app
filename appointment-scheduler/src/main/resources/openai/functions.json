@@ -1,0 +1,128 @@
+[
+    {
+        "name": "appointment_booking",
+        "description": "When user want to book appointment, then this function should be called.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "date": {
+                    "type": "string",
+                    "format": "date",
+                    "example": "2023-07-23",
+                    "description": "Date, when the user wants to book an appointment. The date must be in the format of YYYY-MM-DD."
+                },
+                "time": {
+                    "type": "string",
+                    "example": "10am",
+                    "description": "time, on which user wants to book an appointment on a specified date. Time must be in %H%a format."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "name of the patient"
+                },
+                "contact": {
+                    "type": "integer",
+                    "description": "contact number of the patient"
+                }
+            },
+            "required": [
+                "date",
+                "time",
+                "name",
+                "contact"
+            ]
+        }
+    },
+    {
+        "name": "appointment_reschedule",
+        "description": "When user want to reschedule appointment, then this function should be called.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "date": {
+                    "type": "string",
+                    "format": "date",
+                    "example": "2023-07-23",
+                    "description": "It is the date on which the user wants to reschedule the appointment. The date must be in the format of YYYY-MM-DD."
+                },
+                "time": {
+                    "type": "string",
+                    "example": "11am",
+                    "description": "It is the time on which user wants to reschedule the appointment. Time must be in %H%a format."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "name of the patient"
+                },
+                "contact": {
+                    "type": "integer",
+                    "description": "contact number of the patient"
+                }
+            },
+            "required": [
+                "date",
+                "time",
+                "name",
+                "contact"
+            ]
+        }
+    },
+    {
+        "name": "appointment_cancel",
+        "description": "When user want to cancel appointment, then this function should be called.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "date": {
+                    "type": "string",
+                    "format": "date",
+                    "example": "2023-07-23",
+                    "description": "Date, on which user has appointment and wants to delete it. The date must be in the format of YYYY-MM-DD."
+                },
+                "time": {
+                    "type": "string",
+                    "example": "05am",
+                    "description": "time, on which user has an appointment and wants to delete it. Time must be in %H%a format."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "name of the patient"
+                },
+                "contact": {
+                    "type": "integer",
+                    "description": "contact number of the patient"
+                }
+            },
+            "required": [
+                "date",
+                "time",
+                "name",
+                "contact"
+            ]
+        }
+    },
+    {
+        "name": "appointment_checking",
+        "description": "When user wants to check if appointment is available or not, then this function should be called.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "date": {
+                    "type": "string",
+                    "format": "date",
+                    "example": "2023-07-23",
+                    "description": "Date, when the user wants to book an appointment. The date must be in the format of YYYY-MM-DD."
+                },
+                "time": {
+                    "type": "string",
+                    "example": "05pm",
+                    "description": "time, on which user wants to book an appointment on a specified date. Time must be in %H%a format."
+                }
+            },
+            "required": [
+                "date",
+                "time"
+            ]
+        }
+    }
+]
