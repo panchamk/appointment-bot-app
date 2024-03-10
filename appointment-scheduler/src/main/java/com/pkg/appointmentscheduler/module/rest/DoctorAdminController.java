@@ -32,8 +32,7 @@ public class DoctorAdminController {
 
     @GetMapping("list")
     public List<Doctor> fetchDoctors() {
-        return doctorService.fetchD
-        octorList();
+        return doctorService.fetchDoctorList();
     }
     @GetMapping("/{doctorId}/booked")
     public List<PatientAppointment> fetchAppointments(@PathVariable("doctorId") String doctorId) {

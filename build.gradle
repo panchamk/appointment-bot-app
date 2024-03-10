@@ -9,7 +9,6 @@ buildscript {
         classpath 'io.spring.gradle:dependency-management-plugin:1.1.4'
         classpath 'com.google.cloud.tools:appengine-gradle-plugin:2.8.0'
     }
-  }
 }
 plugins {
     id 'application'

@@ -27,7 +27,8 @@ public class PageRefreshFilter implements Filter {
     private void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
         String path = request.getServletPath();
-        if ("/".equals(path) || path.contains(".") || path.contains("v1/appointment") || path.contains("v1/doctor")) {
+        if ("/".equals(path) || path.contains(".") || path.contains("v1/appointment") 
+            || path.contains("v1/doctor") || path.contains("swagger") || path.contains("api-docs")) {
             chain.doFilter(request, response);
         } else {
             request.getRequestDispatcher(PAGE).forward(request, response);

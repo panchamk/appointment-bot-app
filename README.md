@@ -11,6 +11,11 @@ An appointment scheduling service powered by openai chat assistant model.
 ./gradlew start
 ```
 
+## api docs
+```
+http://localhost:8080/swagger-ui/index.html#/
+```
+
 ## run UI only
 ```
 ./gradlew startUI
